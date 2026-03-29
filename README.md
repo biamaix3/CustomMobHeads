@@ -35,17 +35,17 @@ You can download the latest version from [Modrinth](https://modrinth.com/plugin/
 
 ---
 
-### 🔧 Development Notes
-
-- Built using **Maven** and **Java 8**
-- Compiled plugin files appear in the `target/` directory after building
-
----
 
 ### 📜 License
 
 This project uses a custom license.  
 Please avoid forking or redistributing unless explicitly authorized.
+
+---
+
+### 🔧 Development Notes
+
+- Built using **Maven** and **Java 8**
 
 ---
 

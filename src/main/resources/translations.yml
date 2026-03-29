@@ -16,6 +16,7 @@ blaze: "Blaze"
 bogged: "Bogged"
 breeze: "Breeze"
 camel: "Camel"
+camel_husk: "Camel Husk"
 cat:
   all_black: "All Black Cat"
   black: "Black Cat"
@@ -34,6 +35,11 @@ chicken:
   warm: "Warm Chicken"
   cold: "Cold Chicken"
 cod: "Cod"
+copper_golem:
+  unaffected: "Copper Golem"
+  exposed: "Exposed Copper Golem"
+  weathered: "Weathered Copper Golem"
+  oxidized: "Oxidized Copper Golem"
 cow:
   temperate: "Temperate Cow"
   warm: "Warm Cow"
@@ -88,6 +94,7 @@ mule: "Mule"
 mooshroom:
   red: "Red Mooshroom"
   brown: "Brown Mooshroom"
+nautilus: "Nautilus"
 ocelot: "Ocelot"
 panda:
   aggressive: "Aggressive Panda"
@@ -97,6 +104,7 @@ panda:
   playful: "Playful Panda"
   weak: "Weak Panda"
   worried: "Worried Panda"
+parched: "Parched"
 parrot:
   blue: "Blue Parrot"
   cyan: "Cyan Parrot"
@@ -331,6 +339,9 @@ wolf:
 zoglin: "Zoglin"
 zombie: "Zombie"
 zombie_horse: "Zombie Horse"
+zombie_nautilus:
+  temperate: "Zombie Nautilus"
+  warm: "Coral Zombie Nautilus"
 zombie_pigman: "Zombie Pigman"
 zombified_piglin: "Zombified Piglin"
 zombie_villager:

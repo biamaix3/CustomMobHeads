@@ -15,6 +15,7 @@ blaze: 10.0
 bogged: 6.0
 breeze: 10.0
 camel: 27.0
+camel_husk: 35.0
 cat:
   all_black: 33.0
   black: 33.0
@@ -33,6 +34,11 @@ chicken:
   warm: 5.0
   cold: 5.0
 cod: 7.5
+copper_golem:
+  unaffected: 4.0
+  exposed: 4.0
+  weathered: 4.0
+  oxidized: 4.0
 cow:
   temperate: 5.0
   warm: 5.0
@@ -87,6 +93,7 @@ mule: 30.0
 mooshroom:
   red: 75.0
   brown: 100.0
+nautilus: 5.0
 ocelot: 20.0
 #
 #panda:
@@ -106,6 +113,7 @@ panda:
   lazy: 40.0
   worried: 40.0
   normal: 30.0
+parched: 8.0
 parrot:
   blue: 40.0
   cyan: 40.0
@@ -339,7 +347,10 @@ wolf:
   angry_woods: 20.0
 zoglin: 100.0
 zombie: 5.0
-zombie_horse: 100.0
+zombie_horse: 35.0
+zombie_nautilus:
+  temperate: 40.0
+  warm: 40.0
 zombie_pigman: 4.0
 zombified_piglin: 4.0
 zombie_villager:

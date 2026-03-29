@@ -135,6 +135,7 @@ public class Main extends JavaPlugin implements Listener {
 
             String configPath = variantKey != null ? mobKey + "." + variantKey : mobKey;
 
+            // GETTING THE CHANCE
             //if (!chancesConfig.contains(configPath)) return;
             double chancePercent = getConfig().getDouble("default-drop-chance", 50.0);
             if (chancesConfig.contains(configPath)) {
@@ -144,6 +145,7 @@ public class Main extends JavaPlugin implements Listener {
             }
             double chance = chancePercent / 100.0;
 
+            // CHECK IF THE MOD SHOULD DROP A HEAD
             //if (random.nextDouble() > chance && !getConfig().getBoolean("force-drop-all", false)) return;
             boolean forceDrop = getConfig().getBoolean("force-drop-all", false);
             if (!forceDrop && random.nextDouble() > chance) {
@@ -175,17 +177,21 @@ public class Main extends JavaPlugin implements Listener {
                 getLogger().info("Forcing a drop for: " + configPath);
             }
 
+            // CORRECTING NAMES
             String name = translationsConfig.getString(configPath);
             if (name != null && !name.endsWith("Projectile")) name += " Head";
             //String textureKey = variantKey != null ? mobKey + "_" + variantKey : mobKey;
             //String texture = texturesConfig.getString("textures." + textureKey);
-            String texture = texturesConfig.getString(configPath);
 
             //getLogger().info("Creating head: " + name + " with texture: " + texture);
 
+            // ADDING KILLER LORE
             List<Component> lore = getConfig().getBoolean("add-killer-lore", true)
                     ? Collections.singletonList(Component.text("Killed by " + killer.getName()))
                     : Collections.emptyList();
+
+            //ASSIGNING A TEXTURE
+            String texture = texturesConfig.getString(configPath);
 
             if (texture == null) {
                 //getLogger().warning("Texture key not found: " + textureKey);
@@ -398,13 +404,16 @@ public class Main extends JavaPlugin implements Listener {
             return type + "." + profession;
         }
 
-        // Add more cases as needed
         if (entity instanceof Vex) return random.nextDouble() < 0.5 ? "angry" : "normal";
+
+        if (entity instanceof CopperGolem) return ((CopperGolem) entity).getWeatheringState().name().toLowerCase();
+        if (entity instanceof ZombieNautilus) return ((ZombieNautilus) entity).getVariant().getKey().value();
+
         return null; // Non-variant mob
     }
 
     ItemStack createCustomHead(String name, String texture, List<Component> lore, String configPath) {
-        if (name == null || name.isEmpty()) name = "Mob Head";
+        if (name == null || name.isEmpty()) name = "Unknown Mob Head";
         //getLogger().info("Name: " + name);
         if (configPath == null || configPath.isEmpty()) configPath = "mob";
         if (texture == null || texture.isEmpty()) {
@@ -422,15 +431,24 @@ public class Main extends JavaPlugin implements Listener {
         }
 
         String mobKey = configPath.split("\\.")[0];
+
         if (mobKey.equals("pufferfish")) mobKey = "puffer_fish";
         //getLogger().info("Mob Key for: " + mobKey + ", sound: " + mobKey);
         String soundId;
+
         if (mobKey.equals("cave_spider")) mobKey = "spider";
         if (mobKey.equals("mooshroom")) mobKey = "cow";
+
         if (soundConfig.contains("soundOverrides." + mobKey)) {
             soundId = soundConfig.getString("soundOverrides." + mobKey);
         } else if (configPath.equals("goat.screaming")) {
             soundId = "minecraft:entity." + configPath + ".ambient";
+        } else if (mobKey.equals("copper_golem")) {
+            String temporary = mobKey;
+            if (!configPath.endsWith("unaffected") && !configPath.endsWith("exposed")) {
+                temporary = configPath.replace(".", "_");
+            }
+            soundId = "minecraft:entity." + temporary + ".spin";
         } else {
             soundId = "minecraft:entity." + mobKey + ".ambient";
         }
@@ -502,7 +520,7 @@ public class Main extends JavaPlugin implements Listener {
              */
         } catch (Exception e) {
             //e.printStackTrace();
-            getLogger().severe("Failed to create custom head: " + e.getMessage());
+            getLogger().severe("Failed to create custom head for " + capitalizedMobKey + ": " + e.getMessage());
             for (StackTraceElement ste : e.getStackTrace()) {
                 getLogger().severe("    at " + ste.toString());
             }
